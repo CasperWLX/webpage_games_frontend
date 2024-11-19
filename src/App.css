@@ -1,0 +1,13 @@
+#root {
+  text-align: center;
+}
+
+.background-img{
+  background-image: url('../src/assets/images/background-arcade.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  height: 100vh;
+  background-attachment: fixed;
+}
