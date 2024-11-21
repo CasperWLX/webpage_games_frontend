@@ -40,7 +40,7 @@ const Navbar = () => {
                             className="text-xl hover:text-blue-300 hover:underline"
                             href="/user"
                         >
-                            Account
+                            User
                         </a>
                     ) : (
                         <a

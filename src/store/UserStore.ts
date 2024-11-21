@@ -1,13 +1,25 @@
 import { create } from "zustand";
 import clientUtils from "../util/ClientUtils";
-import Login from "../pages/Login";
 
 interface apiInterface {
+    register: (username: string, password: string) => Promise<boolean>;
     login: (username: string, password: string) => Promise<boolean>;
     logout: () => void;
 }
 
-const userStore = create<apiInterface>()((set) => ({
+const userStore = create<apiInterface>()(() => ({
+
+    register: async (username, password) => {
+        try{
+            const response = await clientUtils.post("/user/v1/register", {username, password})
+            if(response.status === 201){
+                return true;
+            }
+        }catch(error){
+            console.error("Failed to register")
+        }
+        return false;
+    },
 
     login: async (username, password) => {
         try {

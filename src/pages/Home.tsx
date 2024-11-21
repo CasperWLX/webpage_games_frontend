@@ -4,6 +4,7 @@ import GameCard from "../components/game_components/GameCard";
 const Home = () => {
     const { listOfAllGames } = gameStore();
 
+
     return (
         <div className="min-h-screen flex flex-col background-img">
             <div className="flex-1 overflow-auto bg-transparent h-full pt-16">

@@ -6,6 +6,7 @@ interface apiInterface {
 
     listOfAllGames: gameInterface[];
     getAllGames: () => void;
+    fetchOneGame: (id: number) => Promise<gameInterface | null>;
 }
 
 const gameStore = create<apiInterface>()((set) => ({
@@ -24,6 +25,18 @@ const gameStore = create<apiInterface>()((set) => ({
             console.error("Error fetching all games")
         }
     },
+
+    fetchOneGame: async(id: number) => {
+        try{
+            const response = await clientUtils.get(`/api/v1/game/${id}`)
+            if(response.status === 200){
+                return response.data;
+            }
+        }catch(error){
+            console.error("Could not find that game")
+            return null;
+        } 
+    }
 
 }));
 

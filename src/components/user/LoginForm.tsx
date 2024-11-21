@@ -77,7 +77,8 @@ const LoginForm = () => {
 
                 <button
                     type="submit"
-                    className={`w-full bg-gray-500 text-white font-bold py-2 px-4 rounded ${allowLogin ? "cursor-pointer bg-blue-700 hover:bg-blue-900" : "cursor-not-allowed"}`}
+                    disabled={!allowLogin}
+                    className={`w-full text-white font-bold py-2 px-4 rounded ${allowLogin ? "cursor-pointer bg-blue-700 hover:bg-blue-900" : "cursor-not-allowed bg-gray-500"}`}
                 >
                     Login
                 </button>

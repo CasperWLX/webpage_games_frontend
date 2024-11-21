@@ -8,13 +8,16 @@ import Register from "./pages/Register";
 import User from "./pages/User"
 import { useEffect } from "react";
 import gameStore from "./store/GameStore";
+import Game from "./pages/Game";
 
 function App() {
 
-    const {getAllGames} = gameStore();
+    const {getAllGames, listOfAllGames} = gameStore();
 
     useEffect(() => {
-        getAllGames();
+        if(listOfAllGames.length === 0){
+            getAllGames();
+        }
       }, []);
 
     return (
@@ -25,6 +28,7 @@ function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/user" element={<User />} />
+                <Route path="/game/:id" element={<Game />} />
                 <Route path="*" element={<NotFound />} />
             </Routes>
         </BrowserRouter>
