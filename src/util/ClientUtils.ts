@@ -1,17 +1,17 @@
 import axios from "axios";
 
-// Backend URI
 const backendURI = "http://localhost:8080";
 
-// Create Axios instance
+
 const clientUtils = axios.create({
     baseURL: backendURI,
+    withCredentials: true,
 });
 
-// Add interceptor to include JWT token in the Authorization header
+/*
 clientUtils.interceptors.request.use(
     (config) => {
-        const token = sessionStorage.getItem("jwtToken"); // or localStorage if you choose
+        const token = sessionStorage.getItem("jwtToken");
         if (token) {
             config.headers.Authorization = `Bearer ${token}`;
         }
@@ -21,5 +21,6 @@ clientUtils.interceptors.request.use(
         return Promise.reject(error);
     }
 );
+*/
 
 export default clientUtils;

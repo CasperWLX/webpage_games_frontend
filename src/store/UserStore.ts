@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import clientUtils from "../util/ClientUtils";
+import Cookies from "js-cookie";
 
 interface apiInterface {
     register: (username: string, password: string) => Promise<boolean>;
@@ -26,8 +27,8 @@ const userStore = create<apiInterface>()(() => ({
             console.log("inside login");
             const response = await clientUtils.post("/user/v1/login", { username, password })
             if(response.status === 200){
-                sessionStorage.setItem("jwtToken", response.data);
-                sessionStorage.setItem("userIsLoggedIn", "true");
+                Cookies.set("jwtToken", response.data, {secure: true, sameSite: "Strict", expires: 1})
+                Cookies.set("userIsLoggedIn", "true", {secure: true, sameSite: "Strict", expires: 1})
                 console.log("log in successfull");
                 return true;
             }
@@ -39,8 +40,8 @@ const userStore = create<apiInterface>()(() => ({
 
     logout: () => {
         try{
-            sessionStorage.removeItem("userIsLoggedIn");
-            sessionStorage.removeItem("jwtToken")
+            Cookies.remove("jwtToken");
+            Cookies.remove("userIsLoggedIn");
         }catch(error){
             console.error("failed to log out")
         }

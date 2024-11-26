@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import userStore from "../../store/UserStore";
+import xss from "xss";
 
 const LoginForm = () => {
     const [username, setName] = useState<string>("");
@@ -51,7 +52,7 @@ const LoginForm = () => {
                         type="text"
                         id="username"
                         value={username}
-                        onChange={(input) => setName(input.target.value)}
+                        onChange={(input) => setName(xss(input.target.value))}
                         className="w-full p-2 border rounded"
                         required
                     />
@@ -68,7 +69,7 @@ const LoginForm = () => {
                         id="password"
                         value={password}
                         onChange={(password) =>
-                            setPassword(password.target.value)
+                            setPassword(xss(password.target.value))
                         }
                         className="w-full p-2 border rounded"
                         required

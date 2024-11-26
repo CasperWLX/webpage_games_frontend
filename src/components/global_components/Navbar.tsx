@@ -1,11 +1,18 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 import logo from "../../assets/images/game_logo.png";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
     const [isOpen, setOpen] = useState<boolean>(false);
+    const navigate = useNavigate();
 
     const userIsLoggedIn = sessionStorage.getItem("userIsLoggedIn");
+
+
+    const handleNavigate = (destination: string) => {
+        navigate(destination);
+    }
     
 
     const dropdownVariants = {
@@ -24,28 +31,31 @@ const Navbar = () => {
     return (
         <nav className="flex flex-col fixed top-0 z-10 shadow-md bg-gray-900 w-full">
             <div className="pl-4 text-xl justify-between flex pt-4 pb-4">
-                <a href="/" className="flex pl-4">
+                <a 
+                    className="flex pl-4 cursor-pointer"
+                    onClick={() => handleNavigate("/")}
+                > 
                     <img src={logo} alt="Game Station logo" className="w-28" />
                 </a>
 
                 <ul className="hidden lg:flex space-x-5 pr-12 ">
                     <a
-                        className="text-xl hover:text-blue-300 hover:underline"
-                        href="/"
+                        className="text-xl hover:text-blue-300 hover:underline cursor-pointer"
+                        onClick={() => handleNavigate("/")}
                     >
                         Home
                     </a>
                     {userIsLoggedIn ? (
                         <a
-                            className="text-xl hover:text-blue-300 hover:underline"
-                            href="/user"
+                            className="text-xl hover:text-blue-300 hover:underline cursor-pointer"
+                            onClick={() => handleNavigate("/user")}
                         >
                             User
                         </a>
                     ) : (
                         <a
-                            className="text-xl hover:text-blue-300 hover:underline"
-                            href="/login"
+                            className="text-xl hover:text-blue-300 hover:underline cursor-pointer"
+                            onClick={() => handleNavigate("/login")}
                         >
                             Login
                         </a>
@@ -67,22 +77,22 @@ const Navbar = () => {
                 exit="hidden"
             >
                 <a
-                    href="/"
-                    className="p-5 w-full justify-end flex pr-8 hover:bg-gray-950"
+                    onClick={() => handleNavigate("/")}
+                    className="p-5 w-full justify-end flex pr-8 hover:bg-gray-950 cursor-pointer"
                 >
                     Home
                 </a>
                 {userIsLoggedIn ? (
                     <a
-                        href="/user"
-                        className="p-5 w-full justify-end flex pr-8 hover:bg-gray-950"
+                    onClick={() => handleNavigate("/user")}
+                        className="p-5 w-full justify-end flex pr-8 hover:bg-gray-950 cursor-pointer"
                     >
-                        Account
+                        User
                     </a>
                 ) : (
                     <a
-                        href="/Login"
-                        className="p-5 w-full justify-end flex pr-8 hover:bg-gray-950"
+                        onClick={() => handleNavigate("/login")}
+                        className="p-5 w-full justify-end flex pr-8 hover:bg-gray-950 cursor-pointer"
                     >
                         Log in
                     </a>

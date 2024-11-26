@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import userStore from "../../store/UserStore";
 import { useNavigate } from "react-router-dom";
+import xss from "xss";
 
 const RegisterForm = () => {
     const [username, setName] = useState<string>("");
@@ -50,7 +51,7 @@ const RegisterForm = () => {
                         type="text"
                         id="username"
                         value={username}
-                        onChange={(input) => setName(input.target.value)}
+                        onChange={(input) => setName(xss(input.target.value))}
                         className="w-full p-2 border rounded"
                         required
                     />
@@ -67,7 +68,7 @@ const RegisterForm = () => {
                         id="password"
                         value={password}
                         onChange={(password) =>
-                            setPassword(password.target.value)
+                            setPassword(xss(password.target.value))
                         }
                         className="w-full p-2 border rounded"
                         required
@@ -85,7 +86,7 @@ const RegisterForm = () => {
                         id="repeatPassword"
                         value={repeatPassword}
                         onChange={(password) =>
-                            setRepeat(password.target.value)
+                            setRepeat(xss(password.target.value))
                         }
                         className="w-full p-2 border rounded"
                         required

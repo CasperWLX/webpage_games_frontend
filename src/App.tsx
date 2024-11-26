@@ -6,19 +6,9 @@ import Navbar from "./components/global_components/Navbar";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import User from "./pages/User"
-import { useEffect } from "react";
-import gameStore from "./store/GameStore";
 import Game from "./pages/Game";
 
 function App() {
-
-    const {getAllGames, listOfAllGames} = gameStore();
-
-    useEffect(() => {
-        if(listOfAllGames.length === 0){
-            getAllGames();
-        }
-      }, []);
 
     return (
         <BrowserRouter future={{v7_startTransition: true, v7_relativeSplatPath: true}}>

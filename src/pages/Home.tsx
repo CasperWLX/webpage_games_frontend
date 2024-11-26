@@ -1,8 +1,16 @@
 import gameStore from "../store/GameStore";
 import GameCard from "../components/game_components/GameCard";
+import { useEffect } from "react";
 
 const Home = () => {
-    const { listOfAllGames } = gameStore();
+
+    const {getAllGames, listOfAllGames} = gameStore();
+
+    useEffect(() => {
+        if(listOfAllGames.length === 0){
+            getAllGames();
+        }
+      }, []);
 
 
     return (
